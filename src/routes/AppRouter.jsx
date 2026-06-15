@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
+import PublicRoute from './PublicRoute'
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 import DashboardLayout from '../components/layout/DashboardLayout'
@@ -45,8 +46,10 @@ export default function AppRouter() {
     <BrowserRouter>
       <Routes>
         {/* Auth pages — no layout wrapper */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
 
         {/* Public pages — Navbar + Footer */}
         <Route element={<PublicLayout />}>
